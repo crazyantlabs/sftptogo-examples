@@ -59,6 +59,8 @@ class SFTPClient
             $size = "PRE";
           }
 
+          $tempArray[] = $file;
+
           printf("%19s %12s %s\n", $modTime, $size, $file);
         }
         closedir($dh);
