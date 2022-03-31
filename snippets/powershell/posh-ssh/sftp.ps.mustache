@@ -1,0 +1,16 @@
+# PowerShell Posh SSH
+#
+# Use this sample code to connect to your SFTP To Go server and run some file operations using Windows PowerShell.
+#
+# 1) Open a Windows PowerShell session
+#
+# 2) Install dependencies
+#   Install-Module -Name Posh-SSH
+#
+# 3) Run the desired command
+
+# With username/password authentication (you will be prompted to enter your username and password):
+New-SFTPSession -ComputerName {{ Host }} -Credential (Get-Credential)
+
+# With SSH key authentication:
+New-SFTPSession -ComputerName {{ Host }} -Credential {{ UserName }} -KeyFile "<path to your private key>"
