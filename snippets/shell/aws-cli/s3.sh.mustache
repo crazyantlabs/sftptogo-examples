@@ -1,0 +1,28 @@
+# Amazon S3 CLI
+#
+# Use this sample code to connect to your SFTP To Go storage and run some file operations using Amazon S3 CLI.
+#
+# 1) Open a shell terminal session
+#
+# 2) Install AWS CLI. Follow the instructions here: https://aws.amazon.com/cli/
+#
+# 3) Configure AWS CLI credentials
+#   aws configure set region {{ Region }} --profile sftptogo
+#   aws configure set aws_access_key_id {{ AccessKeyId }} --profile sftptogo
+#   aws configure set aws_secret_access_key {{ SecretAccessKey }} --profile sftptogo
+#
+# 4) Export 
+#
+# 4) Run AWS S3 CLI commands
+
+# List files
+aws s3 --profile sftptogo ls s3://{{ Bucket }}/ 
+
+# Upload file
+aws s3 cp example.png s3://{{ Bucket }}/home/
+
+# Download file
+aws s3 cp s3://{{ Bucket }}/home/example.png local.png
+
+# Delete file
+aws s3 rm s3://{{ Bucket }}/home/example.png
