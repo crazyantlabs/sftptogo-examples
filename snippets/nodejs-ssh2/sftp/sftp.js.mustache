@@ -1,0 +1,27 @@
+// sftp.js
+//
+// Use this sample code to connect to your SFTP To Go server and run some file operations using Node.js.
+//
+// 1) Paste this code into a new file (sftp.js)
+//
+// 2) Install dependencies
+//   npm install ssh2-sftp-client
+//
+// 3) Run the script
+//   node sftp.js
+
+let Client = require('ssh2-sftp-client');
+let sftp = new Client();
+
+sftp.connect({
+  host: '{{ Host }}',
+  port: '22',
+  username: '{{ UserName }}',
+  password: '{{ Password }}'
+}).then(() => {
+  return sftp.list('/home');
+}).then(data => {
+  console.log(data, 'the data info');
+}).catch(err => {
+  console.log(err, 'catch error');
+});
