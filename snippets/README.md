@@ -55,17 +55,16 @@ If you don't see your idea listed, and you think it fits into the goals of this 
 
 New code snippets: To add a new code snippet template, create a pull request with your new file. Since these code snippets are bundled with our app, they follow a particular structure for tags that can be used in the template as mentioned above.
 
-Bug fixes: We'd be happy to accept fixes to known issues in any of the code snippets, as long it's a filed through the [issues][is].
+Bug fixes: We'd be happy to accept fixes to known issues in any of the code snippets, as long they are filed through the [issues][is].
 
 ### How to contribute
 
-Once you've made your great commits:
-
 1. [Fork][fk] SFTP To Go examples
 2. Create a topic branch - `git checkout -b my_branch`
-3. Push to your branch - `git push origin my_branch`
-4. Create an [Issue][is] with a link to your branch
-5. That's it! Our team will review the PR and merge 
+3. Make your changes and commit.
+4. Push to your branch - `git push origin my_branch`
+6. Create an [Issue][is] with a link to your branch
+7. That's it! Our team will review the PR and merge 
 
 Licensing
 =========
