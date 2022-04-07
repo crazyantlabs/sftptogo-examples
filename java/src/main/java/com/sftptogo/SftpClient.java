@@ -58,6 +58,20 @@ public final class SftpClient {
         channel.connect();
     }
 
+
+    public void authKey(String keyPath, String pass) throws JSchException {
+        jsch.addIdentity(keyPath, pass);
+        session = jsch.getSession(username, host, port);
+        //disable known hosts checking
+        //if you want to set knows hosts file You can set with jsch.setKnownHosts("path to known hosts file");
+        var config = new Properties();
+        config.put("StrictHostKeyChecking", "no");
+        session.setConfig(config);
+        session.connect();
+        channel = (ChannelSftp) session.openChannel("sftp");
+        channel.connect();
+    }
+
     /**
      * List all files including directories
      *
