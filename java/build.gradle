@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.jcraft:jsch:0.1.55'
+    implementation 'com.github.mwiede:jsch:0.2.0'
 }
 application {
     mainClassName("com.sftptogo.Main")

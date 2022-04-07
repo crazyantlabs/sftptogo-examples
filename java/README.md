@@ -2,7 +2,7 @@ Getting started with JAVA and SFTP to Go
 ======================================
 
 The code in this directory contains sample code in JAVA, that accompanies the tutorial that can be found [here](__).
-This example is built using gradle. We used the [JSCH](http://www.jcraft.com/jsch/) for this example.
+This example is built using gradle. We used the [JSCH](https://github.com/mwiede/jsch) for this example.
 
 ## Running The Example
 
@@ -15,7 +15,7 @@ This example is built using gradle. We used the [JSCH](http://www.jcraft.com/jsc
 2. Running the example
 
 ```shell
-./gradlew run --args="<host> <port> <username> <password> <base directory on server>"
+./gradlew run --args="<host> <port> <username> <password>  <base directory on server> <private key path can be empty>"
 ```
 
 ## Adding JSCH to Project
@@ -26,17 +26,17 @@ There are number of ways to add JSCH in your java project
 
 ```
 <dependency>
-    <groupId>com.jcraft</groupId>
+    <groupId>com.github.mwiede</groupId>
     <artifactId>jsch</artifactId>
-    <version>0.1.55</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
 ### Using Gradle
 
 ```
-implementation 'com.jcraft:jsch:0.1.55'
+implementation 'com.github.mwiede:jsch:0.2.0'
 ```
 
-If you are using other build tools for your project please refer to [JSCH](http://www.jcraft.com/jsch/)
+If you are using other build tools for your project please refer to [JSCH](https://github.com/mwiede/jsch)
 documentation to add it in your project.
