@@ -20,7 +20,7 @@ List of supported code snippets:
 | Language | Dependency | Protocol |
 |----------|------------|----------|
 | Go | sfpt | SFTP |
-| Node.js | ssh2 | SFTP |
+| Node.js | ssh2-sftp-client | SFTP |
 | PHP | ssh2 | SFTP |
 | PowerShell | post-ssh | SFTP |
 | Python | py-sftp | SFTP |
