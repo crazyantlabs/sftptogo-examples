@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.sftptogo'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.github.mwiede:jsch:0.2.0'
+}
+application {
+    mainClassName("com.sftptogo.Main")
+}
