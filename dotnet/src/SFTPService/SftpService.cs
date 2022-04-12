@@ -34,7 +34,7 @@ namespace SFTPService
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Failed in listing files under [{remoteDirectory}]");
+                _logger.LogError(exception, $"Failed to list files under [{remoteDirectory}]");
                 return null;
             }
             finally
@@ -61,7 +61,7 @@ namespace SFTPService
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Failed in uploading file [{localFilePath}] to [{remoteFilePath}]");
+                _logger.LogError(exception, $"Failed to upload file [{localFilePath}] to [{remoteFilePath}]");
             }
             finally
             {
@@ -87,7 +87,7 @@ namespace SFTPService
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Failed in downloading file [{localFilePath}] from [{remoteFilePath}]");
+                _logger.LogError(exception, $"Failed to download file [{localFilePath}] from [{remoteFilePath}]");
             }
             finally
             {
@@ -111,7 +111,7 @@ namespace SFTPService
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, $"Failed in deleting file [{remoteFilePath}]");
+                _logger.LogError(exception, $"Failed to delete file [{remoteFilePath}]");
             }
             finally
             {
