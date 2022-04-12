@@ -4,7 +4,7 @@
 
 The project contains two solutions:
 - SFTPClient: This is a simple console application which depicts how we can use our SFTP service to perform differnet file operations.
-- SFPTService: This is a simple class library project that conatains the contains code to connect, upload , dowload and delete files.
+- SFPTService: This is a simple class library project that contains code to connect, upload ,download and delete files.
 
 #Project Dependencies
 
@@ -28,7 +28,7 @@ The project contains two solutions:
 			}
 	```
 
-3. The next step is to simply call our SFTP service.Any operation performed inside the SFTP service would have :
+3. The next step is to simply call our SFTP service. Any operation performed inside the SFTP service would have to :
 
 	- create an instance of SftpClient 
 	- connect to the server, and perform the desired operation
@@ -48,4 +48,4 @@ TO:
 var privateKey = new PrivateKeyFile(@"C:\some\path\key.pem");
 using var client = new SftpClient(_config.Host, _config.UserName, new[] { privateKey });
 
-where (@"C:\some\path\key.pem") defines the path to your keys
+where (@"C:\some\path\key.pem") defines the path to your public key
