@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFTPService", "SFTPService\SFTPService.csproj", "{58BEF0E8-E1A7-4DB6-A379-EC3EE4DDDF95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFTPClient", "SFTPClient\SFTPClient.csproj", "{21C628AD-4ED9-44A7-BBE8-459D18EC5BB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{338BEBF9-E20B-4382-B66F-506EB6D46DF4}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58BEF0E8-E1A7-4DB6-A379-EC3EE4DDDF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BEF0E8-E1A7-4DB6-A379-EC3EE4DDDF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BEF0E8-E1A7-4DB6-A379-EC3EE4DDDF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BEF0E8-E1A7-4DB6-A379-EC3EE4DDDF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C628AD-4ED9-44A7-BBE8-459D18EC5BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C628AD-4ED9-44A7-BBE8-459D18EC5BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C628AD-4ED9-44A7-BBE8-459D18EC5BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C628AD-4ED9-44A7-BBE8-459D18EC5BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37F382C0-AE05-4206-9485-FE22FD1A06F9}
+	EndGlobalSection
+EndGlobal
