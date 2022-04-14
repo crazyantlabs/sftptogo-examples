@@ -48,7 +48,7 @@ class SFTPClient {
       if (file.type === 'd') {
         console.log(`${new Date(file.modifyTime).toISOString()} PRE ${file.name}`);
       } else {
-        console.log(`${new Date(file.modifyTime).toISOString()} PRE ${file.name}`);
+        console.log(`${new Date(file.modifyTime).toISOString()} ${file.size} ${file.name}`);
       }
 
       fileNames.push(file.name);
