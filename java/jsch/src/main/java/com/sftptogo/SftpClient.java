@@ -118,16 +118,16 @@ public final class SftpClient {
     /**
      * Download a file from remote
      *
-     * @param remoteFile full path of remote file
-     * @param localFile  full path of where to save file locally
+     * @param remotePath full path of remote file
+     * @param localPath  full path of where to save file locally
      * @throws SftpException If there is any problem with downloading file related permissions etc
      */
-    public void downloadFile(String remoteFile, String localFile) throws SftpException {
-        System.out.printf("Downloading [%s] to [%s]...%n", remoteFile, localFile);
+    public void downloadFile(String remotePath, String localPath) throws SftpException {
+        System.out.printf("Downloading [%s] to [%s]...%n", remotePath, localPath);
         if (channel == null) {
             throw new IllegalArgumentException("Connection is not available");
         }
-        channel.get(remoteFile, localFile);
+        channel.get(remotePath, localPath);
     }
 
     /**
