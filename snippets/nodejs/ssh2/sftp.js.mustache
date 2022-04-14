@@ -21,7 +21,7 @@ class SFTPClient {
   }
 
   async connect(options) {
-    console.log(`Conneting to ${options.host}:${options.port}`);
+    console.log(`Connecting to ${options.host}:${options.port}`);
     try {
       await this.client.connect(options);
     } catch (err) {
