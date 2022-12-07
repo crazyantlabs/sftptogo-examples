@@ -98,9 +98,13 @@ class SFTPClient
     $stream = @fopen("ssh2.sftp://$sftp$realpath", 'r');
     if (! $stream)
       throw new Exception("Could not open file: $realpath");
-    $contents = fread($stream, filesize("ssh2.sftp://$sftp$realpath"));
-    file_put_contents ($local_file, $contents);
+    
+    $local = fopen($local_file, "w");
+    while(!feof($stream)){
+      fwrite($local, fread($stream, 8192));
+    }
     @fclose($stream);
+    @fclose($local);
   }
 
   // Delete remote file
