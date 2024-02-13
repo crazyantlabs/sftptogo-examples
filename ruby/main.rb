@@ -126,7 +126,7 @@ if __FILE__ == $PROGRAM_NAME
   puts "--> Done.\n\n"
 
   remote_file = "./example.txt"
-  local_file  = "./download.txt"
+  local_file  = Tempfile.new.path
   #
   # Write directly to a remote file
   #
