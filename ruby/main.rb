@@ -1,3 +1,5 @@
+require 'tempfile'
+require 'stringio'
 require 'net/sftp'
 require 'uri'
 
@@ -46,10 +48,16 @@ class SFTPClient
     end
   end
 
+  # Get remote file directly to a buffer, asynchronously
+  # Requires remote read permissions.
+  def get(remote_file, options = {})
+    session.download(remote_file, nil, options)
+  end
+
   # Get remote file directly to a buffer
   # Requires remote read permissions.
-  def get(remote_file)
-    download(remote_file, nil, options)
+  def get!(remote_file, options = {})
+    session.download!(remote_file, nil, options)
   end
 
   # Open a remote file to a pseudo-IO with the given mode (r - read, w - write)
@@ -65,19 +73,48 @@ class SFTPClient
   # Upload local file to remote file
   # Requires remote write permissions.
   def upload(local_file, remote_file, options = {})
+    session.upload(local_file, remote_file, options)
+  end
+
+  # Upload local file to remote file, asynchronously
+  # Requires remote write permissions.
+  def upload!(local_file, remote_file, options = {})
     session.upload!(local_file, remote_file, options)
   end
 
-  # Download local file to remote file
+  
+  # Download local file to remote file, asynchronously
   # Requires remote read permissions.
   def download(remote_file, local_file, options = {})
+    session.download(remote_file, local_file, options)
+  end
+  
+  # Download local file to remote file,
+  # Requires remote read permissions.
+  def download!(remote_file, local_file, options = {})
     session.download!(remote_file, local_file, options)
+  end
+
+  def connect
+    session.connect
+  end
+
+  def disconnect
+    session.close_channel
+    session.session.close
+  end
+
+  def wait
+    session.loop
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
   # Create SFTP Client to connect to SFTP To Go's server
   client = SFTPClient.new(ENV['SFTPTOGO_URL'])
+
+  # Block until the connection has been fully initialized
+  client.connect
 
   #
   # List working directory files
@@ -89,7 +126,7 @@ if __FILE__ == $PROGRAM_NAME
   puts "--> Done.\n\n"
 
   remote_file = "./example.txt"
-  local_file  = "./download.txt"
+  local_file  = Tempfile.new.path
   #
   # Write directly to a remote file
   #
@@ -103,8 +140,18 @@ if __FILE__ == $PROGRAM_NAME
   # Download the newly created remote file
   #
   puts "Downloading #{remote_file} remote file to #{local_file} local file ...\n"
-  client.download(remote_file, local_file)
+  client.download!(remote_file, local_file)
   puts "--> Done.\n\n"
+
+  #
+  # Download multiple files in parallel
+  #
+  puts "Downloading #{remote_file} remote file 5 times to temp files files ...\n"
+  downloads = []
+  5.times do
+    downloads << client.download(remote_file, Tempfile.new)
+  end
+  downloads.each(&:wait)
 
   #
   # Upload local file to a new remote path
@@ -136,13 +183,39 @@ if __FILE__ == $PROGRAM_NAME
   # Process the remote CSV file as a String IO
   #
   puts "Processing #{remote_file} remote file as CSV ...\n"
-  io = StringIO.new
+ 
   # Adjust :read_size to the maximum number of bytes to read at a time from the source. 
-  data = client.download(remote_file, io.puts, read_size: 32_000)
+  data = client.get!(remote_file, read_size: 32_000)
   csv = CSV.new(data.strip, headers: true)
   csv.each do |row|
     # Now print each row
     puts row.fields.to_csv(col_sep: ' | ')
   end
   puts "--> Done.\n\n"
+
+  puts "Disconnecting from SFTP To Go ...\n"
+  client.disconnect
+  puts "--> Done.\n\n"
+
+
+  #
+  # In a multithreaded environment, like Sidekiq, you must create a new client connection for each set of file operations.
+  #
+  threads = []
+  puts "Downloading 5 times into memory, in a multithreaded way ...\n"
+  
+  5.times do |i|
+    threads << Thread.new do
+      # 
+      newClient = SFTPClient.new(ENV['SFTPTOGO_URL'])
+      newClient.connect
+      # .. You can run more operations using this client
+      puts "Downloading #{remote_file} remote file to into memory ...\n" 
+      newClient.download!(remote_file, nil, {})
+      newClient.disconnect
+    end
+  end
+  threads.each(&:join)
+  puts "--> Done.\n\n"
+  
 end
