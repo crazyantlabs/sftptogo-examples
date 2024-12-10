@@ -22,19 +22,25 @@ Get-SFTPSession
 
 # Upload file
 $SessionId = (Get-SFTPSession).SessionId 
-Set-SFTPFile -SessionId $SessionId -Path {{ LocalFilePath }} -Destination {{ RemoteDirectory }}
+$LocalFilePath = "/uploads/"
+$RemoteDirectory = "/uploads/"
+Set-SFTPFile -SessionId $SessionId -Path $LocalFilePath -Destination $RemoteDirectory
 
-# Download remote file 
-Get-SFTPItem  -SessionId $SessionId -Path {{ RemoteFilePath }} -Destination {{ LocalDirectory }}
+# Download remote file
+$RemoteFilePath = "/uploads/test.txt"
+$LocalDirectory = "c:\myfolder"
+Get-SFTPItem  -SessionId $SessionId -Path $RemoteFilePath -Destination $LocalDirectory
 
 # List files in a directory
-Get-SFTPChildItem -SessionId $SessionId -Path {{ RemoteDirectory }}
+Get-SFTPChildItem -SessionId $SessionId -Path $RemoteDirectory
 
 # Creating directories
-New-SFTPItem -SessionId $SessionId -Path {{ NewRemoteDirectory }} -ItemType Directory 
+$NewRemoteDirectory = "/uploads/test/"
+New-SFTPItem -SessionId $SessionId -Path $NewRemoteDirectory -ItemType Directory 
 
 # Move remote file
-Move-SFTPItem -SessionId $SessionId -Path {{ RemoteFilePath }} -Destination {{ NewRemoteFilePath }}
+$NewRemoteFilePath = "/uploads/test2.txt"
+Move-SFTPItem -SessionId $SessionId -Path $RemoteFilePath -Destination $NewRemoteFilePath
 
 # Delete remote file
-Remove-SFTPItem -SessionId $SessionId -Path {{ NewRemoteFilePath }}
+Remove-SFTPItem -SessionId $SessionId -Path $NewRemoteFilePath
