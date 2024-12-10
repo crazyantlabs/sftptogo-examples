@@ -5,12 +5,36 @@
 # 1) Open a Windows PowerShell session
 #
 # 2) Install dependencies
-#   Install-Module -Name Posh-SSH
+#   Install-Module -Name Posh-SSH -Scope CurrentUser
 #
 # 3) Run the desired command
+
+$Credential = Get-Credential
 
 # With username/password authentication (you will be prompted to enter your username and password):
 New-SFTPSession -ComputerName {{ Host }} -Credential (Get-Credential)
 
 # With SSH key authentication:
 New-SFTPSession -ComputerName {{ Host }} -Credential {{ UserName }} -KeyFile "<path to your private key>"
+
+# Confirm connection
+Get-SFTPSession 
+
+# Upload file
+$SessionId = (Get-SFTPSession).SessionId 
+Set-SFTPFile -SessionId $SessionId -Path {{ LocalFilePath }} -Destination {{ RemoteDirectory }}
+
+# Download remote file 
+Get-SFTPItem  -SessionId $SessionId -Path {{ RemoteFilePath }} -Destination {{ LocalDirectory }}
+
+# List files in a directory
+Get-SFTPChildItem -SessionId $SessionId -Path {{ RemoteDirectory }}
+
+# Creating directories
+New-SFTPItem -SessionId $SessionId -Path {{ NewRemoteDirectory }} -ItemType Directory 
+
+# Move remote file
+Move-SFTPItem -SessionId $SessionId -Path {{ RemoteFilePath }} -Destination {{ NewRemoteFilePath }}
+
+# Delete remote file
+Remove-SFTPItem -SessionId $SessionId -Path {{ NewRemoteFilePath }}
