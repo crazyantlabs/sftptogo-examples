@@ -24,7 +24,7 @@ Get-SFTPSession
 $SessionId = (Get-SFTPSession).SessionId 
 $LocalFilePath = "/uploads/"
 $RemoteDirectory = "/uploads/"
-Set-SFTPFile -SessionId $SessionId -Path $LocalFilePath -Destination $RemoteDirectory
+Set-SFTPItem -SessionId $SessionId -Path $LocalFilePath -Destination $RemoteDirectory
 
 # Download remote file
 $RemoteFilePath = "/uploads/test.txt"
