@@ -10,7 +10,7 @@
 #
 
 # List files
-curl --ftp-ssl --user "{{ UserName }}:{{ Password }}" "ftps://{{ Host }}/" --list-only
+curl --ftp-ssl --user "{{ UserName }}:{{ Password }}" "ftp://{{ Host }}/" --list-only
 
 # Upload file
 curl -T "/path/to/local/file.png" --ftp-ssl --user "{{ UserName }}:{{ Password }}" "ftp://{{ Host }}/path/to/remote/file.png"
