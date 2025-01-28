@@ -1,0 +1,22 @@
+# ftps.sh
+#
+# Use this sample code to upload to your SFTP To Go server and run some file operations using bash script cURL client and FTPS protocol.
+#
+# 1) Open a bash terminal session
+#
+# 2) Run the desired command
+#
+# Note: Use --insecure if you encounter certificate issues.
+#
+
+# List files
+curl --ftp-ssl --user "{{ UserName }}:{{ Password }}" "ftps://{{ Host }}/" --list-only
+
+# Upload file
+curl -T "/path/to/local/file.png" --ftp-ssl --user "{{ UserName }}:{{ Password }}" "ftp://{{ Host }}/path/to/remote/file.png"
+
+# Download file
+curl -o /path/to/local.png --ftp-ssl--user "{{ UserName }}:{{ Password }}" "ftp://{{ Host }}/path/to/remote/file.png"
+
+# Delete file
+curl --ftp-ssl--user "{{ UserName }}:{{ Password }}" -Q "DELE /path/to/remote/file.png" "ftp://{{ Host }}"
