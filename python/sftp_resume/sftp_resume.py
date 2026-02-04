@@ -159,7 +159,7 @@ class SFTPDownloader:
         # Handle empty files
         if remote_size == 0:
             print("Remote file is empty (0 bytes)")
-            open(local_path, 'a').close()
+            open(local_path, 'w').close()
             if os.path.exists(part_path):
                 os.remove(part_path)
             return 0
